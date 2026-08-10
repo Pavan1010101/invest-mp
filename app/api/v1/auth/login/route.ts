@@ -40,6 +40,8 @@ export async function POST(request: Request) {
       const reg = await LocalStore.getByEmail(safeUser.email);
       if (reg) {
         (safeUser as any).registrationId = reg.id;
+        safeUser.name = reg.applicantName || safeUser.name;
+        safeUser.department = reg.organization || safeUser.department;
       }
     }
 
