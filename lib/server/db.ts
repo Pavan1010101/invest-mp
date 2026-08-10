@@ -276,7 +276,7 @@ export interface MeetingRequestRecord {
   companyName: string;
   sector: string;
   requestDate: string;
-  status: 'Pending' | 'Requested' | 'Accepted' | 'Scheduled' | 'Completed' | 'Declined' | 'Cancelled';
+  status: 'Pending' | 'Requested' | 'Accepted' | 'Scheduled' | 'Completed' | 'Declined' | 'Cancelled' | 'Pending_Peer_Acceptance';
   durationMins?: number;
   scheduledTime?: string;
   roomId?: string;
