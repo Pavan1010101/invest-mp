@@ -4,7 +4,7 @@
  */
 import { MongoClient, Db } from 'mongodb';
 
-const uri = process.env.DATABASE_URL || process.env.MONGODB_URI || 'mongodb+srv://kittukurchaniya07_db_user:Y6mCSiIrhculF82C@cohort.wldi601.mongodb.net/sismp?retryWrites=true&w=majority';
+const uri = process.env.DATABASE_URL || process.env.MONGODB_URI || '';
 
 let client: MongoClient;
 let clientPromise: Promise<MongoClient>;
