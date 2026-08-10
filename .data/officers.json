@@ -1,0 +1,152 @@
+[
+  {
+    "id": "super-901",
+    "name": "System Super Administrator",
+    "email": "super.admin@mp.gov.in",
+    "password": "SuperAdmin@MP2026!",
+    "role": "super_admin",
+    "department": "State IT Infrastructure & Governance",
+    "sector": "System Administration & Nodal Officers Management",
+    "badgeRole": "Staff"
+  },
+  {
+    "id": "off-101",
+    "name": "Shri R. K. Vardhan (IAS)",
+    "email": "industrial.policy@mp.gov.in",
+    "password": "Officer@MP2026!",
+    "role": "department_officer",
+    "department": "Department of Industrial Policy & Investment Promotion",
+    "sector": "Manufacturing",
+    "badgeRole": "Government"
+  },
+  {
+    "id": "off-102",
+    "name": "Smt. Ananya Verma (IAS)",
+    "email": "renewable.energy@mp.gov.in",
+    "password": "Renewable@MP2026!",
+    "role": "department_officer",
+    "department": "Department of New & Renewable Energy",
+    "sector": "Renewable Energy",
+    "badgeRole": "Government"
+  },
+  {
+    "id": "off-103",
+    "name": "Shri Manoj Agarwal (IAS)",
+    "email": "science.tech@mp.gov.in",
+    "password": "SciTech@MP2026!",
+    "role": "department_officer",
+    "department": "Department of Science & Technology",
+    "sector": "IT & Electronics",
+    "badgeRole": "Government"
+  },
+  {
+    "id": "off-104",
+    "name": "Dr. S. K. Chouhan",
+    "email": "pharma.health@mp.gov.in",
+    "password": "Pharma@MP2026!",
+    "role": "department_officer",
+    "department": "Department of Public Health & Medical Education",
+    "sector": "Pharma & Biotech",
+    "badgeRole": "Government"
+  },
+  {
+    "id": "off-105",
+    "name": "Shri Rajesh Gupta",
+    "email": "msme.dept@mp.gov.in",
+    "password": "MSME@MP2026!",
+    "role": "department_officer",
+    "department": "MP Micro, Small & Medium Enterprises (MSME)",
+    "sector": "Agro & MSME",
+    "badgeRole": "Government"
+  },
+  {
+    "id": "off-106",
+    "name": "Shri Vikram Singh",
+    "email": "auto.industry@mp.gov.in",
+    "password": "Auto@MP2026!",
+    "role": "department_officer",
+    "department": "Department of Automobile & Heavy Engineering",
+    "sector": "Automobile",
+    "badgeRole": "Government"
+  },
+  {
+    "id": "off-107",
+    "name": "Smt. Meenakshi Sharma",
+    "email": "tourism.dept@mp.gov.in",
+    "password": "Tourism@MP2026!",
+    "role": "department_officer",
+    "department": "Department of Tourism & Culture",
+    "sector": "Tourism",
+    "badgeRole": "Government"
+  },
+  {
+    "id": "desk-201",
+    "name": "Main Registration Desk Officer",
+    "email": "registration.desk@mp.gov.in",
+    "password": "RegDesk@MP2026!",
+    "role": "registration_desk",
+    "department": "On-Site Registration & Badge Operations",
+    "sector": "Event Operations",
+    "badgeRole": "Staff"
+  },
+  {
+    "id": "sec-202",
+    "name": "Security Gate Operations Lead",
+    "email": "security.desk@mp.gov.in",
+    "password": "Security@MP2026!",
+    "role": "security_staff",
+    "department": "Hall Security & QR Audit Control",
+    "sector": "Venue Security",
+    "badgeRole": "Staff"
+  },
+  {
+    "id": "rm-203",
+    "name": "Senior Relationship Manager",
+    "email": "relationship.mgr@mp.gov.in",
+    "password": "RM@MP2026!",
+    "role": "relationship_manager",
+    "department": "Investor Relations & B2B Facilitation",
+    "sector": "Investor Concierge",
+    "badgeRole": "Staff"
+  },
+  {
+    "id": "pav-204",
+    "name": "Chief Pavilion & Exhibition Manager",
+    "email": "pavilion.mgr@mp.gov.in",
+    "password": "Pavilion@MP2026!",
+    "role": "pavilion_manager",
+    "department": "Exhibition & Industry Stall Management",
+    "sector": "Exhibition Hall",
+    "badgeRole": "Staff"
+  },
+  {
+    "id": "org-205",
+    "name": "Summit Event Operations Controller",
+    "email": "event.organizer@mp.gov.in",
+    "password": "Organizer@MP2026!",
+    "role": "event_organizer",
+    "department": "Executive Event Control Room",
+    "sector": "Summit Management",
+    "badgeRole": "Staff"
+  },
+  {
+    "id": "admin-201",
+    "name": "MPIDC Chief Administrator",
+    "email": "mpidc.admin@mp.gov.in",
+    "password": "MPIDC@MP2026!",
+    "role": "mpidc_admin",
+    "department": "MP Industrial Development Corporation",
+    "sector": "All Sectors",
+    "badgeRole": "Staff"
+  },
+  {
+    "id": "cmo-301",
+    "name": "Chief Minister Office Secretary",
+    "email": "cmo.official@mp.gov.in",
+    "password": "CMO@MP2026!",
+    "role": "cmo_official",
+    "department": "Chief Minister's Office (CMO)",
+    "sector": "Executive Overview",
+    "badgeRole": "Government"
+  }
+]

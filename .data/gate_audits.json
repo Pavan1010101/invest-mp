@@ -1,0 +1,83 @@
+[
+  {
+    "id": "log-1786027820499-141",
+    "regId": "IMP26-01055",
+    "applicantName": "PAVAN",
+    "organization": "ASHTRABYTE",
+    "badgeRole": "Investor",
+    "gate": "Gate 1 - Main Plenary Entrance",
+    "status": "GRANTED",
+    "timestamp": "08:20 pm"
+  },
+  {
+    "id": "log-1786027817726-901",
+    "regId": "IMP26-01055",
+    "applicantName": "PAVAN",
+    "organization": "ASHTRABYTE",
+    "badgeRole": "Investor",
+    "gate": "Gate 1 - Main Plenary Entrance",
+    "status": "GRANTED",
+    "timestamp": "08:20 pm"
+  },
+  {
+    "id": "log-1785966438742-200",
+    "regId": "IMP26-INVALID",
+    "applicantName": "Unknown Attendee",
+    "organization": "N/A",
+    "badgeRole": "Unknown",
+    "gate": "Gate 1 - Main Plenary Entrance",
+    "status": "DENIED",
+    "timestamp": "03:17 am",
+    "reason": "Unregistered Registration ID"
+  },
+  {
+    "id": "log-1785966302713-239",
+    "regId": "IMP26-75158",
+    "applicantName": "PAVAN",
+    "organization": "ASHTRABYTE",
+    "badgeRole": "Investor",
+    "gate": "Gate 2 - VIP Lounge Entrance",
+    "status": "GRANTED",
+    "timestamp": "03:15 am"
+  },
+  {
+    "id": "log-1785966293643-132",
+    "regId": "IMP26-75158",
+    "applicantName": "PAVAN",
+    "organization": "ASHTRABYTE",
+    "badgeRole": "Investor",
+    "gate": "Gate 1 - Main Plenary Entrance",
+    "status": "GRANTED",
+    "timestamp": "03:14 am"
+  },
+  {
+    "id": "log-1785966292209-775",
+    "regId": "IMP26-75158",
+    "applicantName": "PAVAN",
+    "organization": "ASHTRABYTE",
+    "badgeRole": "Investor",
+    "gate": "Gate 1 - Main Plenary Entrance",
+    "status": "GRANTED",
+    "timestamp": "03:14 am"
+  },
+  {
+    "id": "log-1785966279161-440",
+    "regId": "IMP26-75158",
+    "applicantName": "PAVAN",
+    "organization": "ASHTRABYTE",
+    "badgeRole": "Investor",
+    "gate": "Gate 1 - Main Plenary Entrance",
+    "status": "GRANTED",
+    "timestamp": "03:14 am"
+  },
+  {
+    "id": "log-1785966167291-887",
+    "regId": "IMP26-75158",
+    "applicantName": "PAVAN",
+    "organization": "ASHTRABYTE",
+    "badgeRole": "Investor",
+    "gate": "Gate 1 - Main Plenary Entrance",
+    "status": "GRANTED",
+    "timestamp": "03:12 am"
+  }
+]

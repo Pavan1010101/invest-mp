@@ -1,0 +1,151 @@
+[
+  {
+    "id": "meet-1785969229213-997",
+    "applicantId": "IMP26-75158",
+    "applicantName": "PAVAN",
+    "companyName": "ASHTRABYTE",
+    "sector": "IT & Electronics",
+    "requestDate": "2026-08-05T22:33:49.213Z",
+    "status": "Cancelled"
+  },
+  {
+    "id": "meet-1785969724228-630",
+    "applicantId": "IMP26-75158",
+    "applicantName": "PAVAN",
+    "companyName": "ASHTRABYTE",
+    "sector": "IT & Electronics",
+    "requestDate": "2026-08-05T22:42:04.228Z",
+    "status": "Cancelled"
+  },
+  {
+    "id": "meet-1785970197463-349",
+    "applicantId": "IMP26-75158",
+    "applicantName": "PAVAN",
+    "companyName": "ASHTRABYTE",
+    "sector": "IT & Electronics",
+    "durationMins": 60,
+    "requestDate": "2026-08-05T22:49:57.463Z",
+    "status": "Scheduled"
+  },
+  {
+    "id": "meet-1785970442112-706",
+    "applicantId": "IMP26-75158",
+    "applicantName": "PAVAN",
+    "companyName": "ASHTRABYTE",
+    "sector": "IT & Electronics",
+    "durationMins": 30,
+    "requestDate": "2026-08-05T22:54:02.112Z",
+    "status": "Scheduled"
+  },
+  {
+    "id": "meet-1785970752720-336",
+    "applicantId": "IMP26-75158",
+    "applicantName": "PAVAN",
+    "companyName": "ASHTRABYTE",
+    "sector": "IT & Electronics",
+    "durationMins": 30,
+    "requestDate": "2026-08-05T22:59:12.720Z",
+    "status": "Scheduled"
+  },
+  {
+    "id": "meet-1785970904591-607",
+    "applicantId": "IMP26-75158",
+    "applicantName": "PAVAN",
+    "companyName": "ASHTRABYTE",
+    "sector": "IT & Electronics",
+    "durationMins": 30,
+    "requestDate": "2026-08-05T23:01:44.591Z",
+    "status": "Scheduled"
+  },
+  {
+    "id": "meet-1785970934768-647",
+    "applicantId": "IMP26-75158",
+    "applicantName": "PAVAN",
+    "companyName": "ASHTRABYTE",
+    "sector": "IT & Electronics",
+    "durationMins": 30,
+    "requestDate": "2026-08-05T23:02:14.768Z",
+    "status": "Completed"
+  },
+  {
+    "id": "meet-1785971158453-580",
+    "applicantId": "IMP26-75158",
+    "applicantName": "PAVAN",
+    "companyName": "ASHTRABYTE",
+    "sector": "IT & Electronics",
+    "durationMins": 30,
+    "requestDate": "2026-08-05T23:05:58.453Z",
+    "status": "Scheduled",
+    "scheduledTime": "09:30 AM - 10:15 AM",
+    "roomId": "RM-A01",
+    "roomName": "VVIP Pavilion Conference Room A-01"
+  },
+  {
+    "id": "meet-1786028033210-303",
+    "applicantId": "IMP26-01055",
+    "applicantName": "PAVAN",
+    "companyName": "ASHTRABYTE",
+    "sector": "Manufacturing",
+    "durationMins": 45,
+    "requestDate": "2026-08-06T14:53:53.210Z",
+    "status": "Scheduled",
+    "scheduledTime": "09:30 AM - 10:15 AM",
+    "roomId": "RM-A02",
+    "roomName": "VVIP Pavilion Conference Room A-02"
+  },
+  {
+    "id": "meet-1786043117582-564",
+    "applicantId": "IMP26-75158",
+    "applicantName": "PAVAN",
+    "companyName": "My Organization",
+    "sector": "General",
+    "durationMins": 45,
+    "requestDate": "2026-08-06T19:05:17.582Z",
+    "status": "Cancelled"
+  },
+  {
+    "id": "meet-1786044136940-37",
+    "applicantId": "IMP26-01055",
+    "applicantName": "PAVAN",
+    "companyName": "My Organization",
+    "sector": "General",
+    "durationMins": 45,
+    "requestDate": "2026-08-06T19:22:16.940Z",
+    "status": "Accepted"
+  },
+  {
+    "id": "meet-1786044506737-633",
+    "applicantId": "IMP26-01055",
+    "applicantName": "PAVAN",
+    "companyName": "My Organization",
+    "sector": "General",
+    "durationMins": 45,
+    "requestDate": "2026-08-06T19:28:26.737Z",
+    "status": "Scheduled",
+    "officerName": "PAVAN",
+    "departmentName": "ASHTRABYTE",
+    "requestedDate": "2026-02-24",
+    "timeSlot": "10:00 AM - 10:45 AM",
+    "scheduledTime": "09:30 AM - 10:15 AM",
+    "roomId": "RM-A01",
+    "roomName": "VVIP Pavilion Conference Room A-01"
+  },
+  {
+    "id": "meet-1786048224190-217",
+    "applicantId": "IMP26-93039",
+    "applicantName": "Kapil Kurchaniya",
+    "companyName": "My Organization",
+    "sector": "General",
+    "durationMins": 45,
+    "requestDate": "2026-08-06T20:30:24.190Z",
+    "status": "Completed",
+    "officerId": "IMP26-01055",
+    "officerName": "PAVAN",
+    "departmentName": "ASHTRABYTE",
+    "requestedDate": "2026-02-24",
+    "timeSlot": "10:00 AM - 10:45 AM",
+    "scheduledTime": "09:30 AM - 10:15 AM",
+    "roomId": "RM-A01",
+    "roomName": "VVIP Pavilion Conference Room A-01"
+  }
+]

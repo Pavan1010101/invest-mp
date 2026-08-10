@@ -1,0 +1,217 @@
+// SISMP — Prisma MongoDB Database Schema Specification
+// State Investment Summit Management Platform
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// User & Auth Management
+model User {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  email        String   @unique
+  name         String
+  role         String
+  departmentId String?
+  department   String?
+  sector       String?
+  badgeRole    String?
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("users")
+}
+
+// Attendee Registrations
+model Registration {
+  id                    String   @id @map("_id") // e.g. IMP26-00104
+  applicantName         String
+  email                 String   @unique
+  phone                 String
+  designation           String?
+  organization          String
+  type                  String   // Investor | Delegate | Foreign Investor | Startup | Department Visitor
+  badgeRole             String   // Investor | Government | Media | Delegate | Startup | Staff
+  sectorId              String
+  country               String
+  state                 String?
+  city                  String?
+  status                String   @default("Submitted") // Submitted | Approved | Rejected | Resubmit
+  rejectionReason       String?
+  resubmitReason        String?
+  investmentInterestINR BigInt?  @default(0)
+  notes                 String?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  @@map("registrations")
+}
+
+// Submitted Verification Documents
+model Document {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  registrationId String
+  fileName       String
+  fileUrl        String
+  fileType       String   // PDF | JPG | PNG
+  verified       Boolean  @default(false)
+  uploadedAt     DateTime @default(now())
+
+  @@map("documents")
+}
+
+// Accompanying Delegates
+model Delegate {
+  id             String  @id @default(auto()) @map("_id") @db.ObjectId
+  registrationId String
+  name           String
+  email          String
+  designation    String?
+
+  @@map("delegates")
+}
+
+// CRM 360 Degree Investor Profile
+model InvestorProfile {
+  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
+  registrationId        String   @unique
+  proposedCapitalINR    BigInt   @default(0)
+  expectedJobs          Int      @default(0)
+  relationshipManagerId String?
+  stage                 String   @default("New") // New | In Discussion | Committed | Invested | Closed
+  isEscalated           Boolean  @default(false)
+  escalationReason      String?
+  lastContactDate       DateTime @default(now())
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  @@map("investor_profiles")
+}
+
+// Append-Only Interaction Timeline
+model CommunicationLog {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  investorId String
+  type       String   // meeting | call | email | site_visit
+  summary    String
+  loggedById String
+  loggedAt   DateTime @default(now())
+
+  @@map("communication_logs")
+}
+
+// CRM Follow-up Tasks
+model Task {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  investorId  String
+  title       String
+  dueDate     DateTime
+  priority    String   @default("medium") // low | medium | high
+  isCompleted Boolean  @default(false)
+
+  @@map("tasks")
+}
+
+// MoU Bilateral Agreements
+model MoU {
+  id                 String    @id @map("_id") // e.g. MOU-2026-001
+  title              String
+  investorId         String
+  officerId          String?
+  departmentName     String
+  proposedCapitalINR BigInt
+  estimatedJobs      Int
+  sector             String
+  status             String    @default("Draft") // Draft | Pending Signatures | Signed | Executed
+  investorSigned     Boolean   @default(false)
+  investorSignedAt   DateTime?
+  targetSigned       Boolean   @default(false)
+  targetSignedAt     DateTime?
+  departmentSigned   Boolean   @default(false)
+  departmentSignedAt DateTime?
+  draftUrl           String?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  @@map("mous")
+}
+
+// B2G Scheduled Meetings
+model Meeting {
+  id             String   @id @map("_id") // e.g. MTG-801
+  registrationId String
+  officerId      String?
+  departmentName String
+  requestedDate  String
+  timeSlot       String
+  roomId         String
+  roomName       String
+  status         String   @default("Requested") // Requested | Confirmed | Completed | Cancelled | Expired
+  expiresAt      DateTime // 24h expiration timestamp
+  notes          String?
+  createdAt      DateTime @default(now())
+
+  @@map("meetings")
+}
+
+// On-site Badge Scans
+model BadgeScan {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  registrationId String   @unique
+  scannedAt      DateTime @default(now())
+  scannedBy      String
+  qrToken        String
+
+  @@map("badge_scans")
+}
+
+// Immutable System Audit Log
+model AuditLog {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  actorId    String?
+  action     String   // REGISTRATION_SUBMITTED | REGISTRATION_APPROVED | REGISTRATION_REJECTED | MOU_EXECUTED | etc.
+  entityType String
+  entityId   String
+  payload    String?
+  createdAt  DateTime @default(now())
+
+  @@map("audit_logs")
+}
+
+// Pavilion Space Requests
+model PavilionRequest {
+  id                   String   @id @map("_id")
+  applicantId          String
+  applicantName        String
+  companyName          String
+  requestedHall        String
+  preferredStallNumber String
+  sector               String
+  powerRequirementKW   Int
+  requestDate          String
+  status               String   @default("Pending") // Pending | Approved | Rejected | Cancelled
+  createdAt            DateTime @default(now())
+
+  @@map("pavilion_requests")
+}
+
+// Gate Audit Scans
+model GateAudit {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  regId         String
+  applicantName String
+  organization  String
+  badgeRole     String
+  gate          String
+  status        String   // GRANTED | DENIED
+  reason        String?
+  timestamp     String
+  createdAt     DateTime @default(now())
+
+  @@map("gate_audits")
+}

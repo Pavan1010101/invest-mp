@@ -1,0 +1,463 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ============================================
+   SISMP Design Token System
+   State Investment Summit Management Platform
+   ============================================ */
+
+@theme {
+  /* Colors - Primary */
+  --color-primary: #1E3A8A;
+  --color-primary-light: #3B82F6;
+  --color-primary-dark: #1E2D5F;
+  --color-primary-50: #EFF6FF;
+  --color-primary-100: #DBEAFE;
+  --color-primary-200: #BFDBFE;
+  --color-primary-500: #3B82F6;
+  --color-primary-600: #2563EB;
+  --color-primary-700: #1D4ED8;
+  --color-primary-800: #1E40AF;
+  --color-primary-900: #1E3A8A;
+
+  /* Colors - Accent (Gold) */
+  --color-accent: #D97706;
+  --color-accent-light: #F59E0B;
+  --color-accent-dark: #B45309;
+  --color-accent-50: #FFFBEB;
+  --color-accent-100: #FEF3C7;
+  --color-accent-500: #F59E0B;
+  --color-accent-600: #D97706;
+  --color-accent-700: #B45309;
+
+  /* Colors - Surfaces */
+  --color-background: #F8FAFC;
+  --color-surface: #FFFFFF;
+  --color-surface-elevated: #FFFFFF;
+  --color-foreground: #0F172A;
+  --color-foreground-muted: #64748B;
+  --color-foreground-subtle: #94A3B8;
+  --color-border: #E2E8F0;
+  --color-border-strong: #CBD5E1;
+  --color-ring: #1E3A8A;
+
+  /* Colors - Semantic / Status (BRD-fixed) */
+  --color-status-submitted: #2563EB;
+  --color-status-submitted-bg: #EFF6FF;
+  --color-status-approved: #16A34A;
+  --color-status-approved-bg: #F0FDF4;
+  --color-status-rejected: #DC2626;
+  --color-status-rejected-bg: #FEF2F2;
+  --color-status-resubmit: #D97706;
+  --color-status-resubmit-bg: #FFFBEB;
+
+  /* CRM Pipeline Status Colors */
+  --color-crm-new: #64748B;
+  --color-crm-new-bg: #F8FAFC;
+  --color-crm-discussion: #3B82F6;
+  --color-crm-discussion-bg: #EFF6FF;
+  --color-crm-committed: #4F46E5;
+  --color-crm-committed-bg: #EEF2FF;
+  --color-crm-invested: #059669;
+  --color-crm-invested-bg: #ECFDF5;
+  --color-crm-closed: #94A3B8;
+  --color-crm-closed-bg: #F1F5F9;
+
+  /* Badge Role Colors (BRD-fixed — not redesignable) */
+  --color-badge-investor: #2563EB;
+  --color-badge-investor-bg: #DBEAFE;
+  --color-badge-government: #DC2626;
+  --color-badge-government-bg: #FEE2E2;
+  --color-badge-media: #EAB308;
+  --color-badge-media-bg: #FEF9C3;
+  --color-badge-delegate: #0D9488;
+  --color-badge-delegate-bg: #CCFBF1;
+  --color-badge-startup: #7C3AED;
+  --color-badge-startup-bg: #EDE9FE;
+  --color-badge-staff: #475569;
+  --color-badge-staff-bg: #F1F5F9;
+
+  /* Colors - Feedback */
+  --color-destructive: #DC2626;
+  --color-destructive-bg: #FEF2F2;
+  --color-success: #16A34A;
+  --color-success-bg: #F0FDF4;
+  --color-warning: #D97706;
+  --color-warning-bg: #FFFBEB;
+  --color-info: #2563EB;
+  --color-info-bg: #EFF6FF;
+
+  /* Sidebar */
+  --color-sidebar: #0F172A;
+  --color-sidebar-foreground: #E2E8F0;
+  --color-sidebar-muted: #94A3B8;
+  --color-sidebar-active: #1D4ED8;
+  --color-sidebar-hover: #1E293B;
+
+  /* Typography */
+  --font-sans: 'Noto Sans', 'Noto Sans Devanagari', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', 'Fira Code', monospace;
+  --font-display: 'Noto Sans', 'Noto Sans Devanagari', system-ui, sans-serif;
+}
+
+/* ============================================
+   Dark Mode System Rules
+   Applied when ThemeProvider toggles .dark on <html>
+   ============================================ */
+
+:root {
+  --bg: #F8FAFC;
+  --surface: #FFFFFF;
+  --surface-elevated: #FFFFFF;
+  --fg: #0F172A;
+  --fg-muted: #64748B;
+  --fg-subtle: #94A3B8;
+  --bdr: #E2E8F0;
+  --bdr-strong: #CBD5E1;
+}
+
+.dark {
+  --bg: #0B1120;
+  --surface: #111827;
+  --surface-elevated: #1E293B;
+  --fg: #F8FAFC;
+  --fg-muted: #94A3B8;
+  --fg-subtle: #64748B;
+  --bdr: #1E293B;
+  --bdr-strong: #334155;
+
+  /* Theme Token Overrides for Tailwind Utility Classes */
+  --color-background: #0B1120;
+  --color-surface: #111827;
+  --color-surface-elevated: #1E293B;
+  --color-foreground: #F8FAFC;
+  --color-foreground-muted: #94A3B8;
+  --color-foreground-subtle: #64748B;
+  --color-border: #1E293B;
+  --color-border-strong: #334155;
+
+  /* Primary Light Tints for Dark Mode */
+  --color-primary-50: #1E293B;
+  --color-primary-100: #1E3A8A;
+  --color-primary-200: #1D4ED8;
+
+  /* Status backgrounds in dark mode */
+  --color-status-submitted-bg: #1E293B;
+  --color-status-approved-bg: #064E3B;
+  --color-status-rejected-bg: #7F1D1D;
+  --color-status-resubmit-bg: #78350F;
+
+  color-scheme: dark;
+}
+
+/* Hardcoded Light Class Dark Fallbacks for Form Elements & Cards */
+.dark .bg-white {
+  background-color: #111827 !important;
+  color: #F8FAFC !important;
+}
+
+.dark .bg-slate-50,
+.dark .bg-slate-100 {
+  background-color: #1E293B !important;
+  color: #F8FAFC !important;
+}
+
+.dark .bg-slate-200 {
+  background-color: #334155 !important;
+}
+
+.dark .text-slate-900,
+.dark .text-slate-800,
+.dark .text-slate-700 {
+  color: #F8FAFC !important;
+}
+
+.dark .text-slate-600,
+.dark .text-slate-500 {
+  color: #94A3B8 !important;
+}
+
+.dark .border-slate-200,
+.dark .border-slate-100,
+.dark .border-slate-300 {
+  border-color: #1E293B !important;
+}
+
+/* Dark Mode Inputs, Selects, and Form Elements */
+.dark input:not([type="checkbox"]):not([type="radio"]),
+.dark select,
+.dark textarea {
+  background-color: #111827 !important;
+  color: #F8FAFC !important;
+  border-color: #334155 !important;
+}
+
+.dark option {
+  background-color: #111827 !important;
+  color: #F8FAFC !important;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #64748B !important;
+}
+
+.dark .bg-primary-50\/60,
+.dark .bg-primary-50\/20,
+.dark .bg-primary-50\/40 {
+  background-color: rgba(30, 41, 59, 0.8) !important;
+  border-color: #1D4ED8 !important;
+  color: #F8FAFC !important;
+}
+
+/* Category Badge Tint Fixes in Dark Mode */
+.dark .bg-blue-50 { background-color: rgba(30, 58, 138, 0.4) !important; color: #60A5FA !important; }
+.dark .bg-teal-50 { background-color: rgba(13, 148, 136, 0.3) !important; color: #2DD4BF !important; }
+.dark .bg-indigo-50 { background-color: rgba(79, 70, 229, 0.3) !important; color: #818CF8 !important; }
+.dark .bg-purple-50 { background-color: rgba(124, 58, 237, 0.3) !important; color: #C084FC !important; }
+.dark .bg-amber-50 { background-color: rgba(180, 83, 9, 0.3) !important; color: #FBBF24 !important; }
+.dark .bg-rose-50 { background-color: rgba(225, 29, 72, 0.3) !important; color: #FB7185 !important; }
+
+/* ============================================
+   Base Styles
+   ============================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  line-height: 1.6;
+  min-height: 100dvh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-ring);
+  outline-offset: 2px;
+  border-radius: 0.375rem;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+button, [role="button"], a, select, input[type="checkbox"], input[type="radio"], summary {
+  cursor: pointer;
+}
+
+button:disabled, [disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--fg);
+  letter-spacing: -0.01em;
+}
+
+.font-data {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+::selection {
+  background-color: var(--color-primary-600);
+  color: #FFFFFF;
+}
+
+.dark ::selection {
+  background-color: var(--color-primary-800);
+  color: var(--color-primary-100);
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background-color: var(--bdr-strong); border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background-color: var(--fg-muted); }
+
+/* ============================================
+   Custom Utility Component Classes
+   ============================================ */
+
+.hero-gradient {
+  background: linear-gradient(145deg, #0c1445 0%, #1E3A8A 35%, #1D4ED8 70%, #1E40AF 100%);
+  position: relative;
+}
+
+.hero-gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 600px 400px at 15% 50%, rgba(59, 130, 246, 0.15), transparent),
+    radial-gradient(ellipse 500px 500px at 85% 20%, rgba(217, 119, 6, 0.08), transparent),
+    radial-gradient(ellipse 800px 600px at 50% 110%, rgba(30, 58, 138, 0.4), transparent);
+  pointer-events: none;
+}
+
+.glass-header {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+}
+
+.dark .glass-header {
+  background: rgba(11, 17, 32, 0.85);
+}
+
+.accent-bar-top {
+  position: relative;
+}
+.accent-bar-top::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #D97706, #F59E0B);
+  border-radius: 12px 12px 0 0;
+}
+
+.section-accent {
+  width: 4rem;
+  height: 3px;
+  background: linear-gradient(90deg, #D97706, #F59E0B);
+  border-radius: 9999px;
+  margin: 0 auto;
+}
+
+.sidebar-gradient {
+  background: linear-gradient(180deg, #0F172A 0%, #1E293B 100%);
+}
+
+@keyframes pulse-live {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.95); }
+}
+.live-pulse { animation: pulse-live 2s ease-in-out infinite; }
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in-scale {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.animate-fade-in { animation: fade-in 0.5s ease-out both; }
+.animate-fade-in-scale { animation: fade-in-scale 0.5s ease-out both; }
+.animate-slide-up { animation: slide-up 0.6s ease-out both; }
+.animate-slide-in-right { animation: slide-in-right 0.5s ease-out both; }
+.animate-slide-in-up { animation: slide-up 0.6s ease-out both; }
+
+.stagger-children > * {
+  opacity: 0;
+  animation: fade-in 0.5s ease-out forwards;
+}
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 100ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 200ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 300ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 400ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 500ms; }
+.stagger-children > *:nth-child(7) { animation-delay: 600ms; }
+.stagger-children > *:nth-child(8) { animation-delay: 700ms; }
+
+.queue-detail-layout {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  height: calc(100vh - 64px);
+}
+
+@media (max-width: 1024px) {
+  .queue-detail-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================
+   Print Styles — Only print the Entry Pass card
+   ============================================ */
+@media print {
+  /* Hide everything by default */
+  body * {
+    visibility: hidden !important;
+  }
+
+  /* Show only the pass card and its children */
+  #attendee-pass-card,
+  #attendee-pass-card * {
+    visibility: visible !important;
+  }
+
+  /* Position the card at the top-left of the page */
+  #attendee-pass-card {
+    position: fixed !important;
+    left: 50% !important;
+    top: 5% !important;
+    transform: translateX(-50%) !important;
+    width: 320px !important;
+    border: 2px solid #cbd5e1 !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    box-shadow: none !important;
+    background: white !important;
+    color: #0f172a !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Force color printing for the role band & bottom bar */
+  #attendee-pass-card div {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Hide the print button itself */
+  .print-hide {
+    display: none !important;
+  }
+
+  /* Remove page margins for a clean print */
+  @page {
+    margin: 10mm;
+    size: auto;
+  }
+}

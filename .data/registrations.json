@@ -1,0 +1,358 @@
+[
+  {
+    "id": "IMP26-93039",
+    "applicantName": "Kapil Kurchaniya",
+    "email": "kittukurchaniya07@gmail.com",
+    "phone": "+919754330045",
+    "designation": "CEO",
+    "organization": "MY COMPANY",
+    "type": "Delegate",
+    "badgeRole": "Delegate",
+    "sector": "IT & Electronics",
+    "country": "India",
+    "state": "Madhya Pradesh",
+    "city": "Bhopal",
+    "status": "Approved",
+    "investmentInterestINR": 100000000,
+    "notes": "",
+    "submittedAt": "2026-08-06T20:28:07.678Z",
+    "createdAt": "2026-08-06T20:28:07.678Z",
+    "updatedAt": "2026-08-06T20:28:39.768Z",
+    "password": "MPGIS-93039",
+    "department": "Department of Science & Technology",
+    "documents": [],
+    "delegates": []
+  },
+  {
+    "id": "IMP26-01055",
+    "applicantName": "PAVAN",
+    "email": "pavankurchaniya01@gmail.com",
+    "phone": "6232522706",
+    "designation": "CEO",
+    "organization": "ASHTRABYTE",
+    "type": "Investor",
+    "badgeRole": "Investor",
+    "sector": "Manufacturing",
+    "country": "India",
+    "state": "Madhya Pradesh",
+    "city": "Bhopal",
+    "status": "Approved",
+    "investmentInterestINR": 200000000,
+    "notes": "",
+    "submittedAt": "2026-08-06T14:44:50.224Z",
+    "createdAt": "2026-08-06T14:44:50.224Z",
+    "updatedAt": "2026-08-06T14:46:55.613Z",
+    "password": "MPGIS-01055",
+    "department": "Department of Industrial Policy & Investment Promotion",
+    "documents": [],
+    "delegates": []
+  },
+  {
+    "id": "IMP26-75158",
+    "applicantName": "PAVAN",
+    "email": "kapilkurchaniya98@gmail.com",
+    "phone": "+919131026526",
+    "designation": "CEO",
+    "organization": "ASHTRABYTE",
+    "type": "Investor",
+    "badgeRole": "Investor",
+    "sector": "IT & Electronics",
+    "country": "India",
+    "state": "Madhya Pradesh",
+    "city": "Bhopal",
+    "status": "Approved",
+    "investmentInterestINR": 100000000,
+    "notes": "",
+    "submittedAt": "2026-08-05T21:26:15.098Z",
+    "createdAt": "2026-08-05T21:26:15.098Z",
+    "updatedAt": "2026-08-05T21:26:44.053Z",
+    "password": "MPGIS-75158",
+    "department": "Department of Science & Technology",
+    "documents": [],
+    "delegates": []
+  },
+  {
+    "id": "IMP26-60557",
+    "applicantName": "Summit Delegate",
+    "email": "delegate.60557@investmp.gov.in",
+    "phone": "+91 98110 60557",
+    "designation": "Executive Director",
+    "organization": "Global Infrastructure Corp",
+    "type": "Investor",
+    "badgeRole": "Investor",
+    "sector": "Infrastructure & Urban Development",
+    "country": "India",
+    "state": "Madhya Pradesh",
+    "department": "Department of Urban Development & Housing",
+    "status": "Submitted",
+    "submittedAt": "2026-02-05T15:45:00Z",
+    "investmentInterestINR": 3500000000,
+    "documents": [
+      {
+        "id": "doc-60557-1",
+        "name": "Global_Infra_Registration.pdf",
+        "type": "PDF",
+        "url": "#",
+        "verified": true
+      }
+    ],
+    "delegates": [],
+    "notes": "Proposing Smart City commercial complex in Bhopal."
+  },
+  {
+    "id": "IMP26-39324",
+    "applicantName": "Pawan Kurchaniya",
+    "email": "pawan.kurchaniya@mp.gov.in",
+    "phone": "+91 98260 39324",
+    "designation": "Managing Director & Founder",
+    "organization": "MP Innovation & Tech Enterprises Ltd.",
+    "type": "Investor",
+    "badgeRole": "Investor",
+    "sector": "Information Technology & Electronics",
+    "country": "India",
+    "state": "Madhya Pradesh",
+    "department": "Department of Science & Technology",
+    "status": "Submitted",
+    "submittedAt": "2026-02-05T14:20:00Z",
+    "investmentInterestINR": 1500000000,
+    "documents": [
+      {
+        "id": "doc-39324-1",
+        "name": "MP_Innovation_Tech_MOA.pdf",
+        "type": "PDF",
+        "url": "#",
+        "verified": true
+      },
+      {
+        "id": "doc-39324-2",
+        "name": "Board_Resolution_TechPark.pdf",
+        "type": "PDF",
+        "url": "#",
+        "verified": true
+      }
+    ],
+    "delegates": [
+      {
+        "id": "del-39324-1",
+        "name": "Sanjay Verma",
+        "designation": "Chief Technology Officer",
+        "email": "sanjay.verma@mptech.com"
+      }
+    ],
+    "notes": "Proposing 50-acre AI & Software Development Park near Super Corridor Indore."
+  },
+  {
+    "id": "IMP26-00104",
+    "applicantName": "Vikramaditya Birla",
+    "email": "v.birla@adityabirla.com",
+    "phone": "+91 98200 12345",
+    "designation": "Managing Director & CEO",
+    "organization": "Grasim Industries Ltd.",
+    "type": "Investor",
+    "badgeRole": "Investor",
+    "sector": "Manufacturing",
+    "country": "India",
+    "state": "Madhya Pradesh",
+    "department": "Department of Industrial Policy & Investment Promotion",
+    "status": "Submitted",
+    "submittedAt": "2026-02-05T09:30:00Z",
+    "investmentInterestINR": 25000000000,
+    "documents": [
+      {
+        "id": "doc-1",
+        "name": "Grasim_MOA_AOA.pdf",
+        "type": "PDF",
+        "url": "#",
+        "verified": true
+      },
+      {
+        "id": "doc-2",
+        "name": "Board_Resolution_Investment.pdf",
+        "type": "PDF",
+        "url": "#",
+        "verified": true
+      },
+      {
+        "id": "doc-3",
+        "name": "PAN_GST_Certificate.pdf",
+        "type": "PDF",
+        "url": "#",
+        "verified": true
+      }
+    ],
+    "delegates": [
+      {
+        "id": "del-1",
+        "name": "Rajesh Shah",
+        "designation": "VP Corporate Affairs",
+        "email": "r.shah@adityabirla.com"
+      },
+      {
+        "id": "del-2",
+        "name": "Priya Nambiar",
+        "designation": "General Manager Projects",
+        "email": "p.nambiar@adityabirla.com"
+      }
+    ],
+    "notes": "Interested in setting up a mega textile and chemical processing facility near Pithampur."
+  },
+  {
+    "id": "IMP26-00105",
+    "applicantName": "Sarah Jenkins",
+    "email": "s.jenkins@suzlon.com",
+    "phone": "+44 7700 900077",
+    "designation": "Head of Global Expansion",
+    "organization": "Vestas Wind Systems A/S",
+    "type": "Foreign Investor",
+    "badgeRole": "Investor",
+    "sector": "Renewable Energy",
+    "country": "United Kingdom",
+    "state": "London",
+    "department": "Department of New & Renewable Energy",
+    "status": "Submitted",
+    "submittedAt": "2026-02-05T11:15:00Z",
+    "investmentInterestINR": 42000000000,
+    "documents": [
+      {
+        "id": "doc-4",
+        "name": "Vestas_Certificate_Incorporation.pdf",
+        "type": "PDF",
+        "url": "#",
+        "verified": true
+      },
+      {
+        "id": "doc-5",
+        "name": "Passport_Copy_SarahJenkins.pdf",
+        "type": "PDF",
+        "url": "#",
+        "verified": true
+      }
+    ],
+    "delegates": [
+      {
+        "id": "del-3",
+        "name": "Hans Meier",
+        "designation": "Chief Technical Officer",
+        "email": "h.meier@vestas.com"
+      }
+    ],
+    "notes": "Proposing 1.2GW wind-solar hybrid energy park in Malwa region."
+  },
+  {
+    "id": "IMP26-00106",
+    "applicantName": "Dr. Anita Roy",
+    "email": "anita.roy@lupin.com",
+    "phone": "+91 99301 44556",
+    "designation": "Executive Vice President R&D",
+    "organization": "Lupin Pharmaceuticals Ltd.",
+    "type": "Investor",
+    "badgeRole": "Investor",
+    "sector": "Pharma & Biotech",
+    "country": "India",
+    "state": "Maharashtra",
+    "department": "Department of Public Health & Medical Education",
+    "status": "Resubmit",
+    "submittedAt": "2026-02-04T16:20:00Z",
+    "investmentInterestINR": 8500000000,
+    "resubmitReason": "Please re-upload a clearer scanned copy of the Board Resolution letter.",
+    "documents": [
+      {
+        "id": "doc-6",
+        "name": "Lupin_Registration_Doc.pdf",
+        "type": "PDF",
+        "url": "#",
+        "verified": false
+      }
+    ],
+    "delegates": []
+  },
+  {
+    "id": "IMP26-00107",
+    "applicantName": "Aarav Sharma",
+    "email": "aarav@greenmobility.io",
+    "phone": "+91 98112 33445",
+    "designation": "Co-Founder & CEO",
+    "organization": "GreenCharge Mobility Pvt Ltd",
+    "type": "Startup",
+    "badgeRole": "Startup",
+    "sector": "Automobile",
+    "country": "India",
+    "state": "Madhya Pradesh",
+    "department": "MP Micro, Small & Medium Enterprises (MSME)",
+    "status": "Approved",
+    "submittedAt": "2026-02-03T14:10:00Z",
+    "investmentInterestINR": 350000000,
+    "documents": [
+      {
+        "id": "doc-7",
+        "name": "DPIIT_Recognition_Certificate.pdf",
+        "type": "PDF",
+        "url": "#",
+        "verified": true
+      }
+    ],
+    "delegates": [
+      {
+        "id": "del-4",
+        "name": "Kavita Singh",
+        "designation": "Co-Founder & CTO",
+        "email": "kavita@greenmobility.io"
+      }
+    ]
+  },
+  {
+    "id": "IMP26-00108",
+    "applicantName": "Michael Chen",
+    "email": "m.chen@foxconn.tw",
+    "phone": "+886 912 345 678",
+    "designation": "VP Supply Chain India Strategy",
+    "organization": "Foxconn Electronics Technology",
+    "type": "Foreign Investor",
+    "badgeRole": "Investor",
+    "sector": "IT & Electronics",
+    "country": "Taiwan",
+    "state": "Taipei",
+    "department": "Department of Science & Technology",
+    "status": "Approved",
+    "submittedAt": "2026-02-02T10:00:00Z",
+    "investmentInterestINR": 65000000000,
+    "documents": [
+      {
+        "id": "doc-8",
+        "name": "Foxconn_India_MoU_Draft.pdf",
+        "type": "PDF",
+        "url": "#",
+        "verified": true
+      }
+    ],
+    "delegates": []
+  },
+  {
+    "id": "IMP26-00109",
+    "applicantName": "Rajeev Singhania",
+    "email": "rsinghania@mediastart.in",
+    "phone": "+91 98100 99887",
+    "designation": "Chief Bureau Correspondent",
+    "organization": "Economic Times & Business Standard",
+    "type": "Delegate",
+    "badgeRole": "Media",
+    "sector": "Media & Communications",
+    "country": "India",
+    "state": "Delhi",
+    "department": "Department of Public Relations",
+    "status": "Rejected",
+    "submittedAt": "2026-02-01T12:00:00Z",
+    "rejectionReason": "Press accreditation card expired and could not be verified by PR department.",
+    "investmentInterestINR": 0,
+    "documents": [
+      {
+        "id": "doc-9",
+        "name": "Press_Card_Scan.pdf",
+        "type": "PDF",
+        "url": "#",
+        "verified": false
+      }
+    ],
+    "delegates": []
+  }
+]

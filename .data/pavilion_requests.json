@@ -1,0 +1,50 @@
+[
+  {
+    "id": "req-1785968575246-869",
+    "applicantId": "IMP26-75158",
+    "applicantName": "PAVAN",
+    "companyName": "ASHTRABYTE",
+    "requestedHall": "Hall A (Manufacturing)",
+    "preferredStallNumber": "Any",
+    "sector": "IT & Electronics",
+    "powerRequirementKW": 2,
+    "requestDate": "2026-08-05T22:22:55.246Z",
+    "status": "Cancelled"
+  },
+  {
+    "id": "req-1785969351536-121",
+    "applicantId": "IMP26-75158",
+    "applicantName": "PAVAN",
+    "companyName": "ASHTRABYTE",
+    "requestedHall": "Hall B (IT & Innovation)",
+    "preferredStallNumber": "Any",
+    "sector": "IT & Electronics",
+    "powerRequirementKW": 2,
+    "requestDate": "2026-08-05T22:35:51.536Z",
+    "status": "Cancelled"
+  },
+  {
+    "id": "req-1785969501451-37",
+    "applicantId": "IMP26-75158",
+    "applicantName": "PAVAN",
+    "companyName": "ASHTRABYTE",
+    "requestedHall": "Hall B (IT & Innovation)",
+    "preferredStallNumber": "Any",
+    "sector": "IT & Electronics",
+    "powerRequirementKW": 2,
+    "requestDate": "2026-08-05T22:38:21.451Z",
+    "status": "Approved"
+  },
+  {
+    "id": "req-1786027912394-609",
+    "applicantId": "IMP26-01055",
+    "applicantName": "PAVAN",
+    "companyName": "ASHTRABYTE",
+    "requestedHall": "Hall A (Manufacturing)",
+    "preferredStallNumber": "Any",
+    "sector": "Manufacturing",
+    "powerRequirementKW": 10,
+    "requestDate": "2026-08-06T14:51:52.394Z",
+    "status": "Approved"
+  }
+]
