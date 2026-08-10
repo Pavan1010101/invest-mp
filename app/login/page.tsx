@@ -35,7 +35,33 @@ import { cn } from '@/lib/utils';
 
 export default function LoginPage() {
   const router = useRouter();
-  const { login } = useAuth();
+  const { login, user } = useAuth();
+
+  React.useEffect(() => {
+    if (user) {
+      if (user.role === 'super_admin') {
+        router.push('/dashboards/super-admin');
+      } else if (user.role === 'cmo_official') {
+        router.push('/dashboards/cmo');
+      } else if (user.role === 'mpidc_admin') {
+        router.push('/dashboards/mpidc');
+      } else if (user.role === 'security_staff') {
+        router.push('/staff/security');
+      } else if (user.role === 'registration_desk') {
+        router.push('/staff/badges');
+      } else if (user.role === 'pavilion_manager') {
+        router.push('/staff/pavilions');
+      } else if (user.role === 'event_organizer') {
+        router.push('/staff/events');
+      } else if (user.role === 'relationship_manager') {
+        router.push('/staff/crm');
+      } else if (user.role === 'attendee') {
+        router.push(`/status?id=${(user as any).registrationId || user.email}`);
+      } else {
+        router.push('/staff/approvals');
+      }
+    }
+  }, [user, router]);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
