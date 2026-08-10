@@ -8,7 +8,7 @@
 import { NextResponse } from 'next/server';
 import { RegistrationService } from '@/lib/server/services/registrationService';
 import { EmailService } from '@/lib/server/services/emailService';
-import { LocalStore } from '@/lib/server/db';
+import { LocalStore, OfficerStore } from '@/lib/server/db';
 import { REGISTRATION_STATUSES } from '@/lib/constants/statuses';
 
 export async function PATCH(request: Request) {
@@ -42,6 +42,23 @@ export async function PATCH(request: Request) {
     let emailResult = null;
     if (recipientEmail) {
       if (status === REGISTRATION_STATUSES.APPROVED) {
+        const generatedPassword = `MPGIS-${Math.floor(1000 + Math.random() * 9000)}`;
+        
+        try {
+          await OfficerStore.insert({
+            id: registrationId,
+            name: finalName,
+            email: recipientEmail,
+            password: generatedPassword,
+            role: 'attendee' as any,
+            department: finalOrg,
+            sector: finalSector,
+            badgeRole: finalRole
+          });
+        } catch (e) {
+          console.warn('Failed to insert approved user into OfficerStore:', e);
+        }
+
         emailResult = await EmailService.sendApprovalCredentialsEmail({
           to: recipientEmail,
           applicantName: finalName,
@@ -49,6 +66,7 @@ export async function PATCH(request: Request) {
           organization: finalOrg,
           badgeRole: finalRole,
           sector: finalSector,
+          defaultPassword: generatedPassword,
         });
       } else if (status === REGISTRATION_STATUSES.REJECTED) {
         emailResult = await EmailService.sendRejectionEmail({
