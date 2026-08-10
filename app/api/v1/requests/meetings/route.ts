@@ -27,18 +27,36 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: false, error: 'applicantId and sector are required.' }, { status: 400 });
     }
 
+    // Ensure applicantId is the Registration ID (e.g. IMP26-...)
+    // If it's an email or Mongo ID, find the real Registration ID
+    let finalApplicantId = applicantId;
+    if (applicantId && !applicantId.startsWith('IMP')) {
+      const reg = await LocalStore.getByEmail(applicantId) || await LocalStore.getById(applicantId);
+      if (reg) {
+        finalApplicantId = reg.id;
+        applicantName = applicantName === 'Current User' || applicantName === 'Unknown' ? reg.applicantName : applicantName;
+        companyName = companyName === 'Independent' || companyName === 'Unknown Company' ? reg.organization : companyName;
+      }
+    }
+
+    let finalOfficerId = officerId;
+    if (officerId && !officerId.startsWith('IMP')) {
+      const offReg = await LocalStore.getByEmail(officerId) || await LocalStore.getById(officerId);
+      if (offReg) finalOfficerId = offReg.id;
+    }
+
     const newReq: MeetingRequestRecord = {
       id: `meet-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
-      applicantId,
+      applicantId: finalApplicantId,
       applicantName: applicantName || 'Unknown',
       companyName: companyName || 'Unknown Company',
       sector,
       durationMins: durationMins ? Number(durationMins) : 30,
       requestDate: new Date().toISOString(),
-      status: (officerId && String(officerId).startsWith('IMP')) ? 'Pending_Peer_Acceptance' : (officerName ? 'Requested' : 'Pending'), // P2P meetings wait for peer acceptance
+      status: (finalOfficerId && String(finalOfficerId).startsWith('IMP')) ? 'Pending_Peer_Acceptance' : (officerName ? 'Requested' : 'Pending'), // P2P meetings wait for peer acceptance
       
       // P2P Fields
-      officerId,
+      officerId: finalOfficerId,
       officerName,
       departmentName,
       requestedDate,
