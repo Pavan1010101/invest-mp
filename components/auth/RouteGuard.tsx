@@ -3,39 +3,25 @@
 import React, { useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth/AuthProvider';
-import { PERMISSIONS } from '@/lib/auth/permissions';
+import { ROUTE_ACCESS } from '@/lib/auth/permissions';
 import { ShieldAlert } from 'lucide-react';
 
-const ROUTE_PERMISSIONS: Record<string, string> = {
-  '/staff/approvals': PERMISSIONS.APPROVE_REGISTRATION,
-  '/staff/badges': PERMISSIONS.VIEW_BADGES,
-  '/staff/meetings': PERMISSIONS.MANAGE_MEETINGS,
-  '/staff/crm': PERMISSIONS.VIEW_CRM,
-  '/staff/mou': PERMISSIONS.VIEW_MOU,
-  '/staff/pavilions': PERMISSIONS.VIEW_PAVILIONS,
-  '/staff/events': PERMISSIONS.VIEW_EVENTS,
-  '/staff/security': PERMISSIONS.SCAN_QR,
-  '/staff/admin': PERMISSIONS.VIEW_ADMIN,
-  '/dashboards/super-admin': PERMISSIONS.VIEW_ADMIN,
-  '/dashboards/cmo': PERMISSIONS.VIEW_CMO_DASHBOARD,
-  '/dashboards/mpidc': PERMISSIONS.VIEW_MPIDC_DASHBOARD,
-  '/dashboards/department': PERMISSIONS.VIEW_DEPT_DASHBOARD,
-};
-
 export function RouteGuard({ children }: { children: React.ReactNode }) {
-  const { user, can } = useAuth();
+  const { user } = useAuth();
   const [isReady, setIsReady] = React.useState(false);
   const pathname = usePathname();
   const router = useRouter();
 
-  const getRequiredPermission = () => {
+  const getRequiredRoles = () => {
     if (!pathname) return null;
-    const match = Object.keys(ROUTE_PERMISSIONS).find((route) => pathname.startsWith(route));
-    return match ? ROUTE_PERMISSIONS[match] : null;
+    const match = Object.keys(ROUTE_ACCESS).find((route) => pathname.startsWith(route) && route !== '/');
+    return match ? ROUTE_ACCESS[match] : null;
   };
 
-  const requiredPermission = getRequiredPermission();
-  const hasAccess = !requiredPermission || can(requiredPermission as any);
+  const requiredRoles = getRequiredRoles();
+  // If no specific route mapping found, default to true for safety or let layout handle it.
+  // Actually, we should check if they are authorized. If it's in ROUTE_ACCESS, check role.
+  const hasAccess = !requiredRoles || (user && requiredRoles.includes(user.role as any));
 
   useEffect(() => {
     // Wait a brief tick for AuthProvider localStorage to hydrate
