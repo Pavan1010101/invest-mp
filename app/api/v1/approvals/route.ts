@@ -42,19 +42,29 @@ export async function PATCH(request: Request) {
     let emailResult = null;
     if (recipientEmail) {
       if (status === REGISTRATION_STATUSES.APPROVED) {
-        const generatedPassword = `MPGIS-${Math.floor(1000 + Math.random() * 9000)}`;
+        let finalPassword = `MPGIS-${Math.floor(1000 + Math.random() * 9000)}`;
         
         try {
-          await OfficerStore.insert({
-            id: registrationId,
-            name: finalName,
-            email: recipientEmail,
-            password: generatedPassword,
-            role: 'attendee' as any,
-            department: finalOrg,
-            sector: finalSector,
-            badgeRole: finalRole
-          });
+          const { APPROVED_ATTENDEE_CREDENTIALS } = await import('@/lib/auth/officerCredentials');
+          const staticAttendee = APPROVED_ATTENDEE_CREDENTIALS.find(a => a.email.toLowerCase() === recipientEmail.toLowerCase());
+          
+          if (staticAttendee) {
+            finalPassword = staticAttendee.password;
+          } else {
+            const existing = await OfficerStore.getByEmailOrId(recipientEmail);
+            if (!existing) {
+              await OfficerStore.insert({
+                id: registrationId,
+                name: finalName,
+                email: recipientEmail,
+                password: finalPassword,
+                role: 'attendee' as any,
+                department: finalOrg,
+                sector: finalSector,
+                badgeRole: finalRole
+              });
+            }
+          }
         } catch (e) {
           console.warn('Failed to insert approved user into OfficerStore:', e);
         }
@@ -66,7 +76,7 @@ export async function PATCH(request: Request) {
           organization: finalOrg,
           badgeRole: finalRole,
           sector: finalSector,
-          defaultPassword: generatedPassword,
+          defaultPassword: finalPassword,
         });
       } else if (status === REGISTRATION_STATUSES.REJECTED) {
         emailResult = await EmailService.sendRejectionEmail({
