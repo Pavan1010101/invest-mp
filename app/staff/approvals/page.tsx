@@ -332,7 +332,7 @@ export default function ApprovalsQueuePage() {
                   <div className="flex justify-between">
                     <dt className="text-foreground-muted">Submitted Date:</dt>
                     <dd className="font-data font-medium text-foreground">
-                      {new Date(rec.submittedAt).toLocaleString('en-IN', {
+                      {new Date(rec.submittedAt || (rec as any).createdAt).toLocaleString('en-IN', {
                         dateStyle: 'medium',
                         timeStyle: 'short',
                       })}
