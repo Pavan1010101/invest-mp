@@ -129,7 +129,7 @@ export class EmailService {
               You can track your live application status at any time using your Registration ID on the portal:
             </p>
             <div style="text-align:center; margin-top:20px;">
-              <a href="http://localhost:3000/status?id=${payload.registrationId}" style="display:inline-block; padding:12px 24px; background:#1E3A8A; color:#ffffff; font-weight:bold; text-decoration:none; border-radius:6px; font-size:14px;">
+              <a href="https://invest-mp-53qf.vercel.app/status?id=${payload.registrationId}" style="display:inline-block; padding:12px 24px; background:#1E3A8A; color:#ffffff; font-weight:bold; text-decoration:none; border-radius:6px; font-size:14px;">
                 Track Application Status &rarr;
               </a>
             </div>
@@ -208,7 +208,7 @@ export class EmailService {
             </p>
 
             <div style="text-align:center; margin-top:20px;">
-              <a href="http://localhost:3000/login" style="display:inline-block; padding:12px 24px; background:#047857; color:#ffffff; font-weight:bold; text-decoration:none; border-radius:6px; font-size:14px;">
+              <a href="https://invest-mp-53qf.vercel.app/login" style="display:inline-block; padding:12px 24px; background:#047857; color:#ffffff; font-weight:bold; text-decoration:none; border-radius:6px; font-size:14px;">
                 Sign In to Portal & Update Password &rarr;
               </a>
             </div>
@@ -322,7 +322,7 @@ export class EmailService {
             </div>
 
             <div style="text-align:center; margin-top:20px;">
-              <a href="http://localhost:3000/status?id=${payload.registrationId}" style="display:inline-block; padding:12px 24px; background:#d97706; color:#ffffff; font-weight:bold; text-decoration:none; border-radius:6px; font-size:14px;">
+              <a href="https://invest-mp-53qf.vercel.app/status?id=${payload.registrationId}" style="display:inline-block; padding:12px 24px; background:#d97706; color:#ffffff; font-weight:bold; text-decoration:none; border-radius:6px; font-size:14px;">
                 Upload Requested Documents &rarr;
               </a>
             </div>

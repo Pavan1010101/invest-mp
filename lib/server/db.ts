@@ -135,7 +135,24 @@ export class OfficerStore {
 
   static async getByEmailOrId(query: string): Promise<any | null> {
     if (!query || !query.trim()) return null;
-    const clean = query.trim().toLowerCase();
+    let clean = query.trim().toLowerCase();
+
+    // Resolve registration ID (e.g. IMP26-...) to email
+    if (clean.startsWith('imp')) {
+      try {
+        const uppercaseId = query.trim().toUpperCase();
+        const reg = await prisma.registration.findUnique({ where: { id: uppercaseId } });
+        if (reg && reg.email) {
+          clean = reg.email.toLowerCase();
+        } else {
+           const memReg = memoryRegistrations.find((r) => r.id === uppercaseId);
+           if (memReg && memReg.email) clean = memReg.email.toLowerCase();
+        }
+      } catch (err) {
+        console.warn('Could not resolve registration ID', err);
+      }
+    }
+
     try {
       const records = await prisma.user.findMany();
       const match = records.find(o => o.email.toLowerCase() === clean || o.id === clean);
