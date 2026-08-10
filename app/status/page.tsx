@@ -87,13 +87,22 @@ function StatusTrackerContent() {
       const res = await fetch('/api/v1/registrations/' + encodeURIComponent(q));
       const text = await res.text();
       const json = text ? JSON.parse(text) : {};
-      
       if (res.ok && json.success && json.data) {
+        const resolvedId = json.data.id;
+        setSearchValue(resolvedId);
+        
+        // Update URL to show the ID instead of email
+        if (typeof window !== 'undefined') {
+          const url = new URL(window.location.href);
+          url.searchParams.set('id', resolvedId);
+          window.history.replaceState({}, '', url);
+        }
+
         setRecord(json.data);
-        await fetchMoUs(q);
+        await fetchMoUs(resolvedId);
         
         // Fetch Meetings
-        const mRes = await fetch('/api/v1/requests/meetings?applicantId=' + encodeURIComponent(q));
+        const mRes = await fetch('/api/v1/requests/meetings?applicantId=' + encodeURIComponent(resolvedId));
         const mText = await mRes.text();
         const mJson = mText ? JSON.parse(mText) : {};
         if (mRes.ok && mJson.success && mJson.data) {
