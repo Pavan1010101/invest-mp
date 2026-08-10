@@ -23,20 +23,24 @@ export function AttendeeServices({ record }: AttendeeServicesProps) {
 
   const loadRequests = async () => {
     try {
-      const [pavRes, meetRes, incomingRes, mouRes] = await Promise.all([
+      const [pavRes, meetRes, mouRes] = await Promise.all([
         fetch(`/api/v1/requests/pavilions?applicantId=${encodeURIComponent(record.id)}`),
         fetch(`/api/v1/requests/meetings?applicantId=${encodeURIComponent(record.id)}`),
-        fetch(`/api/v1/requests/meetings`), // Need to fetch all and filter for target
         fetch(`/api/v1/mou?applicantId=${encodeURIComponent(record.id)}`),
       ]);
-      const [pavData, meetData, incomingData, mouData] = await Promise.all([pavRes.json(), meetRes.json(), incomingRes.json(), mouRes.json()]);
+      const [pavData, meetData, mouData] = await Promise.all([pavRes.json(), meetRes.json(), mouRes.json()]);
+      
       if (pavData.success) setPavilionRequests(pavData.data);
-      if (meetData.success) setMeetingRequests(meetData.data);
-      if (incomingData.success) {
-        // Filter incoming requests where this attendee is the target
-        const incoming = incomingData.data.filter((m: any) => m.officerName === record.applicantName && m.applicantId !== record.id);
+      
+      if (meetData.success) {
+        const allMeetings = meetData.data || [];
+        const outgoing = allMeetings.filter((m: any) => m.applicantId === record.id || m.registrationId === record.id);
+        const incoming = allMeetings.filter((m: any) => m.applicantId !== record.id && m.registrationId !== record.id);
+        
+        setMeetingRequests(outgoing);
         setIncomingMeetings(incoming);
       }
+      
       if (mouData.success) setMouRequests(mouData.data);
     } catch (err) {
       console.error('Failed to load requests:', err);
@@ -187,7 +191,7 @@ export function AttendeeServices({ record }: AttendeeServicesProps) {
             <div key={req.id} className={`bg-white dark:bg-slate-900 border rounded-lg flex items-center justify-between shadow-sm ${isInvestor ? 'p-5 border-emerald-200 dark:border-emerald-800' : 'p-3'}`}>
               <div>
                 <div className={`${isInvestor ? 'text-lg text-emerald-900 dark:text-emerald-100' : 'text-xs'} font-bold`}>{req.requestedHall}</div>
-                <div className={`${isInvestor ? 'text-xs mt-1' : 'text-[10px]'} text-slate-500`}>Requested: {new Date(req.requestDate).toLocaleDateString()}</div>
+                <div className={`${isInvestor ? 'text-xs mt-1' : 'text-[10px]'} text-slate-500`}>Requested: {new Date(req.createdAt || req.requestDate || req.requestedDate || Date.now()).toLocaleDateString()}</div>
               </div>
               <div className="flex items-center gap-3">
                 <div className={isInvestor ? 'scale-110' : ''}><StatusPill status={req.status} /></div>
@@ -254,7 +258,7 @@ export function AttendeeServices({ record }: AttendeeServicesProps) {
               <div>
                 <div className="text-xs font-bold">Meeting - {req.sector}</div>
                 <div className="text-[10px] text-slate-500 mt-1 flex items-center gap-2">
-                  <span>Requested: {new Date(req.requestDate).toLocaleDateString()}</span>
+                  <span>Requested: {new Date(req.createdAt || req.requestDate || req.requestedDate || Date.now()).toLocaleDateString()}</span>
                   {req.durationMins && (
                     <span className="font-semibold text-slate-600 dark:text-slate-400">({req.durationMins} mins)</span>
                   )}
@@ -281,7 +285,7 @@ export function AttendeeServices({ record }: AttendeeServicesProps) {
                     <div className="text-xs font-bold text-blue-900 dark:text-blue-200">From: {req.investorName || req.applicantName}</div>
                     <div className="text-[10px] text-blue-700 dark:text-blue-300 mt-1">{req.companyName}</div>
                     <div className="text-[10px] text-slate-500 mt-1 flex items-center gap-2">
-                      <span>{req.requestedDate} • {req.timeSlot}</span>
+                      <span>{new Date(req.createdAt || req.requestDate || req.requestedDate || Date.now()).toLocaleDateString()} • {req.timeSlot || 'Pending Time'}</span>
                     </div>
                   </div>
                   <div className="flex flex-col gap-1 items-end">
