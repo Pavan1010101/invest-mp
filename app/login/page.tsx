@@ -111,7 +111,9 @@ export default function LoginPage() {
       if (response.ok && resData.success && resData.data) {
         const matchedUser = resData.data;
         login({
-          id: matchedUser.id || matchedUser.email,
+          // In our system, the User's MongoDB id is useless for business logic.
+          // Fall back to their email (which works for all attendee/status lookups)
+          id: matchedUser.email,
           name: matchedUser.name,
           email: matchedUser.email,
           role: matchedUser.role,
@@ -137,7 +139,7 @@ export default function LoginPage() {
         } else if (matchedUser.role === 'relationship_manager') {
           router.push('/staff/crm');
         } else if (matchedUser.role === 'attendee') {
-          router.push(`/status?id=${matchedUser.id}`);
+          router.push(`/status?id=${encodeURIComponent(matchedUser.email)}`);
         } else {
           router.push('/staff/approvals');
         }

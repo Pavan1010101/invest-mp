@@ -43,7 +43,7 @@ export default function NetworkingPage() {
       .then(data => {
         if (data.success && data.data) {
           // Filter out the current user if logged in
-          const filtered = data.data.filter((a: any) => a.id !== user?.id && a.id !== (user as any)?.registrationId);
+          const filtered = data.data.filter((a: any) => a.email !== user?.email && a.id !== (user as any)?.registrationId);
           setAttendees(filtered);
         }
       })
@@ -75,7 +75,7 @@ export default function NetworkingPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           // The sender (you)
-          applicantId: user.id || (user as any).registrationId || 'Unknown',
+          applicantId: (user as any).registrationId || user.email || user.id || 'Unknown',
           applicantName: user.name || 'Current User',
           companyName: user.department || (user as any).organization || 'Independent',
           sector: 'General',
