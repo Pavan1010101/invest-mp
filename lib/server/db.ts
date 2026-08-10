@@ -1,11 +1,15 @@
 import { prisma } from './prisma';
+import bcrypt from 'bcryptjs';
 import { StaffRegistrationRecord, MOCK_REGISTRATION_RECORDS } from '@/lib/api/mocks/staffMockData';
 import { DepartmentOfficerCredential, DEPARTMENT_OFFICER_CREDENTIALS } from '@/lib/auth/officerCredentials';
 import { type CRMInvestorRecord, type MoURecord, MOCK_CRM_INVESTORS, MOCK_MOUS } from '@/lib/api/mocks/crmMockData';
 
 // Memory fallbacks for write operations if DB is offline
 const memoryRegistrations: any[] = [...MOCK_REGISTRATION_RECORDS];
-const memoryOfficers: any[] = [...DEPARTMENT_OFFICER_CREDENTIALS];
+const memoryOfficers: any[] = DEPARTMENT_OFFICER_CREDENTIALS.map(o => ({
+  ...o,
+  password: bcrypt.hashSync(o.password || 'default', 10)
+}));
 
 export class LocalStore {
   static init() {}
@@ -149,8 +153,8 @@ export class OfficerStore {
     if (existing) {
       throw new Error(`An officer account with email "${officer.email}" already exists.`);
     }
-
-    memoryOfficers.unshift(officer);
+    const hashedOfficer = { ...officer, password: bcrypt.hashSync(officer.password || 'default', 10) };
+    memoryOfficers.unshift(hashedOfficer);
 
     try {
       return await prisma.user.create({
@@ -162,7 +166,7 @@ export class OfficerStore {
           department: officer.department || null,
           sector: officer.sector || null,
           badgeRole: officer.badgeRole || null,
-          passwordHash: officer.password || 'default',
+          passwordHash: bcrypt.hashSync(officer.password || 'default', 10),
         }
       });
     } catch (err) {

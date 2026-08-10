@@ -81,109 +81,55 @@ export default function LoginPage() {
     }
 
     setIsLoading(true);
-    await new Promise((res) => setTimeout(res, 500));
-
-    // Check custom updated passwords first
-    let isCustomValid = false;
-    if (typeof window !== 'undefined') {
-      try {
-        const stored = localStorage.getItem('sismp_custom_user_passwords');
-        if (stored) {
-          const passStore = JSON.parse(stored);
-          if (passStore[inputEmail] === password) {
-            isCustomValid = true;
-          }
-        }
-      } catch {
-        // fallback
-      }
-    }
-
-    // 1. Try matching against official departmental officer / staff credentials (including custom accounts from disk DB)
-    const matchedOfficer = displayOfficers.find(
-      (c) => (c.email.toLowerCase() === inputEmail || c.id.toLowerCase() === inputEmail) &&
-             (c.password === password || isCustomValid)
-    ) || (isCustomValid ? {
-      id: 'usr-custom',
-      name: email.split('@')[0],
-      email: email.trim(),
-      role: 'department_officer' as any,
-      department: 'Department of Industrial Policy & Investment Promotion',
-    } : null);
-
-    if (matchedOfficer) {
-      login({
-        id: matchedOfficer.id,
-        name: matchedOfficer.name,
-        email: matchedOfficer.email,
-        role: matchedOfficer.role,
-        department: matchedOfficer.department,
-      });
-
-      setIsLoading(false);
-
-      if (matchedOfficer.role === 'super_admin') {
-        router.push('/dashboards/super-admin');
-      } else if (matchedOfficer.role === 'cmo_official') {
-        router.push('/dashboards/cmo');
-      } else if (matchedOfficer.role === 'mpidc_admin') {
-        router.push('/dashboards/mpidc');
-      } else if (matchedOfficer.role === 'security_staff') {
-        router.push('/staff/security');
-      } else if (matchedOfficer.role === 'registration_desk') {
-        router.push('/staff/badges');
-      } else if (matchedOfficer.role === 'pavilion_manager') {
-        router.push('/staff/pavilions');
-      } else if (matchedOfficer.role === 'event_organizer') {
-        router.push('/staff/events');
-      } else if (matchedOfficer.role === 'relationship_manager') {
-        router.push('/staff/crm');
-      } else {
-        // Default for department_officer
-        router.push('/staff/approvals');
-      }
-      return;
-    }
-
-    // 2. Try matching against approved attendee/applicant registration records
     try {
-      const res = await fetch('/api/v1/registrations');
-      const text = await res.text();
-      const json = text ? JSON.parse(text) : {};
-      
-      if (res.ok && json.success && json.data) {
-        const registrations: any[] = json.data;
-        const matchedAttendee = registrations.find(
-          (r) => r.id.toLowerCase() === inputEmail || r.email.toLowerCase() === inputEmail
-        );
+      const response = await fetch('/api/v1/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: inputEmail, password })
+      });
+      const resData = await response.json();
 
-        if (matchedAttendee) {
-          // Check if registration status is Approved
-          if (matchedAttendee.status.toLowerCase() !== 'approved') {
-            setIsLoading(false);
-            setError(`Your registration status is "${matchedAttendee.status}". Login is only available for Approved participants.`);
-            return;
-          }
+      if (response.ok && resData.success && resData.data) {
+        const matchedUser = resData.data;
+        login({
+          id: matchedUser.id || matchedUser.email,
+          name: matchedUser.name,
+          email: matchedUser.email,
+          role: matchedUser.role,
+          department: matchedUser.department || matchedUser.organization,
+        });
 
-          // Validate password (allow default generated MPGIS passcode or custom updated password or "password")
-          const isDefaultPassword = password.toUpperCase().startsWith('MPGIS-');
-          if (isDefaultPassword || isCustomValid || password === 'password' || password === `MPGIS-${matchedAttendee.id.split('-')[1]}`) {
-            login({
-              id: matchedAttendee.id,
-              name: matchedAttendee.applicantName,
-              email: matchedAttendee.email,
-              role: (matchedAttendee.badgeRole || 'investor').toLowerCase() as any,
-              department: matchedAttendee.department,
-            });
+        setIsLoading(false);
 
-            setIsLoading(false);
-            router.push(`/status?id=${matchedAttendee.id}`);
-            return;
-          }
+        if (matchedUser.role === 'super_admin') {
+          router.push('/dashboards/super-admin');
+        } else if (matchedUser.role === 'cmo_official') {
+          router.push('/dashboards/cmo');
+        } else if (matchedUser.role === 'mpidc_admin') {
+          router.push('/dashboards/mpidc');
+        } else if (matchedUser.role === 'security_staff') {
+          router.push('/staff/security');
+        } else if (matchedUser.role === 'registration_desk') {
+          router.push('/staff/badges');
+        } else if (matchedUser.role === 'pavilion_manager') {
+          router.push('/staff/pavilions');
+        } else if (matchedUser.role === 'event_organizer') {
+          router.push('/staff/events');
+        } else if (matchedUser.role === 'relationship_manager') {
+          router.push('/staff/crm');
+        } else if (matchedUser.role === 'attendee') {
+          router.push(`/status?id=${matchedUser.id}`);
+        } else {
+          router.push('/staff/approvals');
         }
+        return;
+      } else {
+        setIsLoading(false);
+        setError(resData.error || 'Invalid credentials.');
+        return;
       }
     } catch (err) {
-      console.warn('Failed to resolve attendee login:', err);
+      console.warn('Failed to resolve login:', err);
     }
 
     setIsLoading(false);
