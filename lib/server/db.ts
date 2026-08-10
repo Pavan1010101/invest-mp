@@ -310,6 +310,30 @@ export class MeetingRequestStore {
       where: { id: { in: Array.from(regIds) } }
     });
     const regMap = new Map(regs.map(r => [r.id, r]));
+    
+    // Fallback to memoryRegistrations
+    regIds.forEach(id => {
+      if (!regMap.has(id)) {
+        const memReg = memoryRegistrations.find(r => r.id === id);
+        if (memReg) regMap.set(id, memReg);
+      }
+    });
+
+    // Fallback to Officers for internal requests
+    const allOfficers = await OfficerStore.getAll();
+    regIds.forEach(id => {
+      if (!regMap.has(id)) {
+        const off = allOfficers.find(o => o.id === id || o.email === id);
+        if (off) {
+          regMap.set(id, {
+            id: off.id,
+            applicantName: off.name || 'Officer',
+            organization: off.department || off.sector || 'Department',
+            sectorId: off.sector || 'General'
+          } as any);
+        }
+      }
+    });
 
     return meetings.map(m => {
       const applicant = regMap.get(m.registrationId);
@@ -384,6 +408,30 @@ export class MoUStore {
       where: { id: { in: Array.from(regIds) } }
     });
     const regMap = new Map(regs.map(r => [r.id, r]));
+    
+    // Fallback to memoryRegistrations
+    regIds.forEach(id => {
+      if (!regMap.has(id)) {
+        const memReg = memoryRegistrations.find(r => r.id === id);
+        if (memReg) regMap.set(id, memReg);
+      }
+    });
+
+    // Fallback to Officers for internal requests
+    const allOfficers = await OfficerStore.getAll();
+    regIds.forEach(id => {
+      if (!regMap.has(id)) {
+        const off = allOfficers.find(o => o.id === id || o.email === id);
+        if (off) {
+          regMap.set(id, {
+            id: off.id,
+            applicantName: off.name || 'Officer',
+            organization: off.department || off.sector || 'Department',
+            sectorId: off.sector || 'General'
+          } as any);
+        }
+      }
+    });
 
     return mous.map(m => {
       const investor = regMap.get(m.investorId);

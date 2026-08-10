@@ -55,7 +55,7 @@ export default function LoginPage() {
         router.push('/staff/events');
       } else if (user.role === 'relationship_manager') {
         router.push('/staff/crm');
-      } else if (user.role === 'attendee') {
+      } else if ((user as any).role === 'attendee') {
         router.push(`/status?id=${(user as any).registrationId || user.email}`);
       } else {
         router.push('/staff/approvals');

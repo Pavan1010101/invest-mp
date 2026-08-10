@@ -21,7 +21,8 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { applicantId, applicantName, companyName, sector, durationMins, officerId, officerName, departmentName, requestedDate, timeSlot } = body;
+    let { applicantId, applicantName, companyName, sector, durationMins, officerId, officerName, departmentName, requestedDate, timeSlot } = body;
+
 
     if (!applicantId || !sector) {
       return NextResponse.json({ success: false, error: 'applicantId and sector are required.' }, { status: 400 });
@@ -31,11 +32,21 @@ export async function POST(request: Request) {
     // If it's an email or Mongo ID, find the real Registration ID
     let finalApplicantId = applicantId;
     if (applicantId && !applicantId.startsWith('IMP')) {
-      const reg = await LocalStore.getByEmail(applicantId) || await LocalStore.getById(applicantId);
+      let reg = await LocalStore.getByEmail(applicantId) || await LocalStore.getById(applicantId);
+      if (!reg) {
+        const off = await OfficerStore.getByEmailOrId(applicantId);
+        if (off) {
+          reg = {
+            id: off.id,
+            applicantName: off.name || 'Officer',
+            organization: off.department || off.sector || 'Department'
+          };
+        }
+      }
       if (reg) {
         finalApplicantId = reg.id;
-        applicantName = applicantName === 'Current User' || applicantName === 'Unknown' ? reg.applicantName : applicantName;
-        companyName = companyName === 'Independent' || companyName === 'Unknown Company' ? reg.organization : companyName;
+        applicantName = applicantName === 'Current User' || applicantName === 'Unknown' ? (reg.applicantName || reg.name) : applicantName;
+        companyName = companyName === 'Independent' || companyName === 'Unknown Company' ? (reg.organization || reg.department) : companyName;
       }
     }
 
