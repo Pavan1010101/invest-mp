@@ -163,7 +163,7 @@ export default function MeetingsPage() {
               createdAt: m.createdAt || new Date().toISOString(),
               notes: m.notes
             };
-          }).filter((m: any) => m.status !== 'Pending_Peer_Acceptance')
+          })
             .sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
           setMeetings(mapped);
         }

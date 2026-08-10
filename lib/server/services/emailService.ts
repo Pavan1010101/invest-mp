@@ -59,6 +59,13 @@ export interface MeetingScheduledEmailPayload {
   meetingId: string;
 }
 
+export interface MeetingAcceptedEmailPayload {
+  to: string;
+  recipientName: string;
+  acceptedByName: string;
+  meetingId: string;
+}
+
 export class EmailService {
   /**
    * 1. Send Application Submission Confirmation Receipt
@@ -384,6 +391,55 @@ export class EmailService {
     `;
 
     return EmailService.dispatchEmail(payload.to, `[SCHEDULED] Meeting with ${payload.otherPartyName}`, htmlContent, payload.meetingId);
+  }
+
+  /**
+   * 6. Send Meeting Accepted Email
+   */
+  static async sendMeetingAcceptedEmail(payload: MeetingAcceptedEmailPayload) {
+    const htmlContent = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="utf-8">
+        <style>
+          body { font-family: 'Segoe UI', Helvetica, Arial, sans-serif; background-color: #f8fafc; margin: 0; padding: 20px; color: #0f172a; }
+          .container { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden; }
+          .header { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); padding: 30px; text-align: center; color: #ffffff; }
+          .badge { display: inline-block; padding: 6px 16px; background: #bae6fd; color: #0369a1; border-radius: 20px; font-weight: bold; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
+          .content { padding: 30px; }
+          .info-box { background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px; padding: 20px; margin: 20px 0; color: #075985; }
+          .footer { background: #f1f5f9; padding: 20px; text-align: center; font-size: 12px; color: #64748b; border-top: 1px solid #e2e8f0; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <div class="badge">MEETING ACCEPTED</div>
+            <h1 style="margin:0; font-size:24px;">Invest Madhya Pradesh</h1>
+            <p style="margin:5px 0 0 0; opacity:0.8; font-size:14px;">Global Investors Summit 2026</p>
+          </div>
+          <div class="content">
+            <h2 style="font-size:18px; color:#0369a1;">Dear ${payload.recipientName},</h2>
+            <p style="font-size:14px; line-height:1.6; color:#334155;">
+              Good news! <strong>${payload.acceptedByName}</strong> has accepted your meeting request (ID: ${payload.meetingId}).
+            </p>
+
+            <div class="info-box">
+              <h3 style="margin:0 0 12px 0; font-size:14px; text-transform:uppercase;">Next Steps</h3>
+              <p style="margin:5px 0;">Our staff is now working to allocate a meeting room and time slot for you. You will receive another notification once the meeting is scheduled.</p>
+            </div>
+            
+          </div>
+          <div class="footer">
+            Official Communication &bull; Government of Madhya Pradesh &bull; MPIDC
+          </div>
+        </div>
+      </body>
+      </html>
+    `;
+
+    return EmailService.dispatchEmail(payload.to, `[ACCEPTED] Meeting Request Accepted by ${payload.acceptedByName}`, htmlContent, payload.meetingId);
   }
 
   /**

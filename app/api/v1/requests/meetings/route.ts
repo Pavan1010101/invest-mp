@@ -101,8 +101,8 @@ export async function PATCH(request: Request) {
       return NextResponse.json({ success: false, error: 'Request not found' }, { status: 404 });
     }
 
-    // Send notifications if meeting is scheduled
-    if (status === 'Scheduled') {
+    // Send notifications if meeting is scheduled or accepted
+    if (status === 'Scheduled' || status === 'Accepted') {
       try {
         const applicant = await LocalStore.getById(updated.registrationId);
         let officer = await LocalStore.getById(updated.officerId || '');
@@ -116,31 +116,42 @@ export async function PATCH(request: Request) {
         const otherPartyForApplicant = officer?.applicantName || officer?.name || updated.departmentName || 'Target Party';
         const otherPartyForOfficer = applicant?.applicantName || 'Target Party';
 
-        if (applicant?.email) {
-          await EmailService.sendMeetingScheduledEmail({
-            to: applicant.email,
-            recipientName: applicant.applicantName || 'Applicant',
-            otherPartyName: otherPartyForApplicant,
-            date,
-            timeSlot: finalTimeSlot,
-            roomName: finalRoomName,
-            meetingId: updated.id
-          });
-        }
+        if (status === 'Scheduled') {
+          if (applicant?.email) {
+            await EmailService.sendMeetingScheduledEmail({
+              to: applicant.email,
+              recipientName: applicant.applicantName || 'Applicant',
+              otherPartyName: otherPartyForApplicant,
+              date,
+              timeSlot: finalTimeSlot,
+              roomName: finalRoomName,
+              meetingId: updated.id
+            });
+          }
 
-        if (officer?.email) {
-          await EmailService.sendMeetingScheduledEmail({
-            to: officer.email,
-            recipientName: officer.applicantName || officer.name || 'Officer',
-            otherPartyName: otherPartyForOfficer,
-            date,
-            timeSlot: finalTimeSlot,
-            roomName: finalRoomName,
-            meetingId: updated.id
-          });
+          if (officer?.email) {
+            await EmailService.sendMeetingScheduledEmail({
+              to: officer.email,
+              recipientName: officer.applicantName || officer.name || 'Officer',
+              otherPartyName: otherPartyForOfficer,
+              date,
+              timeSlot: finalTimeSlot,
+              roomName: finalRoomName,
+              meetingId: updated.id
+            });
+          }
+        } else if (status === 'Accepted') {
+          if (applicant?.email) {
+            await EmailService.sendMeetingAcceptedEmail({
+              to: applicant.email,
+              recipientName: applicant.applicantName || 'Applicant',
+              acceptedByName: otherPartyForApplicant,
+              meetingId: updated.id
+            });
+          }
         }
       } catch (emailErr) {
-        console.error('Failed to send meeting scheduled emails:', emailErr);
+        console.error('Failed to send meeting emails:', emailErr);
       }
     }
 
