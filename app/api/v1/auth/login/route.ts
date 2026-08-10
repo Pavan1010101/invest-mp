@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { OfficerStore } from '@/lib/server/db';
+import { OfficerStore, LocalStore } from '@/lib/server/db';
 import bcrypt from 'bcryptjs';
 
 export async function POST(request: Request) {
@@ -35,6 +35,13 @@ export async function POST(request: Request) {
 
     // Do not return the password hash in the response
     const { password: _, ...safeUser } = user;
+
+    if (safeUser.role === 'attendee') {
+      const reg = await LocalStore.getByEmail(safeUser.email);
+      if (reg) {
+        (safeUser as any).registrationId = reg.id;
+      }
+    }
 
     return NextResponse.json({
       success: true,
