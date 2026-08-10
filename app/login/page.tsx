@@ -58,13 +58,32 @@ export default function LoginPage() {
         return text ? JSON.parse(text) : {};
       })
       .then((json) => {
-        if (json.success && json.data) {
-          setDisplayOfficers(json.data);
+        if (json.success && Array.isArray(json.data)) {
+          // Merge fetched data with original plaintext passwords for display
+          const displayData = json.data.map((fetchedOfficer: any) => {
+            const staticOfficer = DEPARTMENT_OFFICER_CREDENTIALS.find(o => o.email.toLowerCase() === fetchedOfficer.email.toLowerCase());
+            const staticAttendee = APPROVED_ATTENDEE_CREDENTIALS.find(a => a.email.toLowerCase() === fetchedOfficer.email.toLowerCase());
+            
+            let displayPassword = '*(Hidden)*';
+            if (staticOfficer) {
+              displayPassword = staticOfficer.password;
+            } else if (staticAttendee) {
+              displayPassword = staticAttendee.password;
+            }
+            
+            return {
+              ...fetchedOfficer,
+              password: displayPassword
+            };
+          });
+          
+          setDisplayOfficers(displayData);
         } else {
           setDisplayOfficers(getStoredOfficerCredentials());
         }
       })
-      .catch(() => {
+      .catch((err) => {
+        console.warn('Failed to fetch officials from DB, using fallback list:', err);
         setDisplayOfficers(getStoredOfficerCredentials());
       });
   }, []);
